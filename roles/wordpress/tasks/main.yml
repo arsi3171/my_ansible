@@ -5,12 +5,13 @@
     dest=/tmp/wordpress.tar.gz
     validate_certs=no
   sudo: yes
-- name: Extract Wordpress
+
+- name: Extract WordPress
   unarchive:
-    src=/tmp/wordpress.tar.gz
-    dest=/var/www/
+    src=/tmp/wordpress.tar.gz dest=/var/www/
     copy=no
   sudo: yes
+
 - name: Update default Apache site
   sudo: yes
   lineinfile:
@@ -19,19 +20,18 @@
     line="DocumentRoot /var/www/wordpress"
   notify:
     - restart apache
-  sudo: yes
+
 - name: Copy sample config file
-  command: mv /var/www/wordpress/wp-config-sample.php /var/wwww/wordpress/wp-config.phpp creates=/var/wwww/wordpress/wp-config.php
+  command: mv /var/www/wordpress/wp-config-sample.php /var/www/wordpress/wp-config.php creates=/var/www/wordpress/wp-config.php
   sudo: yes
-- name: Updates WordPress config file
-  linefile:
-    dest=/var/wwww/wordpress/wp-config.php
+
+- name: Update WordPress config file
+  lineinfile:
+    dest=/var/www/wordpress/wp-config.php
     regexp="{{ item.regexp }}"
     line="{{ item.line }}"
   with_items:
     - {'regexp': "define\\('DB_NAME', '(.)+'\\);", 'line': "define('DB_NAME', '{{wp_mysql_db}}');"}
     - {'regexp': "define\\('DB_USER', '(.)+'\\);", 'line': "define('DB_USER', '{{wp_mysql_user}}');"}
     - {'regexp': "define\\('DB_PASSWORD', '(.)+'\\);", 'line': "define('DB_PASSWORD', '{{wp_mysql_password}}');"}
-    - {'regexp': "define\\('DB_HOST', '(.)+'\\);", 'line': "define('DB_HOST', ;'{{wp_mysql_host}}');"}
   sudo: yes
-# tasks file for wordpress

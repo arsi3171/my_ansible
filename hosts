@@ -1,8 +1,8 @@
 [database]
-10.0.0.152
+10.0.0.90
 
 [webserver]
 10.0.0.91
 
-[client]
+[windows]
 10.0.0.202

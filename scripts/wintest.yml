@@ -16,12 +16,31 @@
 
       ignore_errors: yes
 
-#   INSTALL FIREFOX
+#   INSTALL CHROME AND OTHER SOFTWARE
 
-    - name: install_firefox
+    - name: Installing Google Chrome
 
       win_chocolatey:
 
-        name: firefox -y
+        name: googlechrome
 
         state: present
+
+    - name: Installing FTP client FileZilla
+     
+      win_chocolatey:
+        
+        name: filezilla
+       
+        state: present
+
+    - name: Installing database management tool
+      win_chocolatey:
+        name: dbeaver
+        state: present
+
+    - name: Adding a windows user for a client
+      win_user:
+        name: Worker
+        password: "Password123"
+        groups: ["Users"]
