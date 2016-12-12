@@ -1,0 +1,8 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+[remote "origin"]
+	url = https://github.com/arsi3171/my_ansible.git
+	fetch = +refs/heads/*:refs/remotes/origin/*

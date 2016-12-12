@@ -1,0 +1,27 @@
+---
+- name: Add an administrator user
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Add an admin
+      win_user:
+        name: Adminas
+        password: Adminas123
+        state: present
+        groups: ["Administrators"]
+- name: Add a simple user
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Add a user
+      win_user:
+        name: Petras
+        password: slaptazodis123
+        state: present
+        groups: ["Users"]
+- name: Install Google Chrome
+  win_chocolatey:
+    name: googlechrome
+- name: Install notepad plus pls
+  win_chocolatey:
+    name: note
